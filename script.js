@@ -1,158 +1,412 @@
-/* ==========================================================
-   IronForm — site interactions + GSAP animations
-   ========================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- Sticky header on scroll ---------- */
-  const header = document.getElementById('siteHeader');
-  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
-  document.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+const cursor = document.querySelector(".cursor");
+const follower = document.querySelector(".cursor-follower");
 
-  /* ---------- Mobile menu toggle ---------- */
-  const burger = document.getElementById('burgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  burger.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    burger.setAttribute('aria-expanded', isOpen);
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    });
-  });
+document.addEventListener("mousemove", (e) => {
 
-  /* ---------- Active nav link on scroll ---------- */
-  const navAnchors = document.querySelectorAll('nav.links a');
-  const sectionIds = ['facilities', 'services', 'membership'];
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-      }
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  sectionIds.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) navObserver.observe(el);
-  });
-
-  /* ==========================================================
-     GSAP animations
-     ========================================================== */
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (typeof gsap === 'undefined') return; // fail safe if CDN didn't load
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  if (reduceMotion) {
-    // Respect reduced motion: skip animation setup, just make sure
-    // everything GSAP would animate is already visible.
-    gsap.set('.hero-eyebrow-row, .hero h1, .hero-side p, .hero .btn-row, .stat, .facility-card, .service-row, .plan, .cta-band h2, .cta-band .btn-primary', { opacity: 1, y: 0, x: 0, clearProps: 'transform' });
-  } else {
-
-    /* ---- Hero entrance timeline (page load) ---- */
-    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    heroTl
-      .from('.hero-eyebrow-row', { opacity: 0, y: 16, duration: 0.6 })
-      .from('.hero h1', { opacity: 0, y: 40, duration: 0.9 }, '-=0.35')
-      .from('.hero-side', { opacity: 0, y: 24, duration: 0.7 }, '-=0.5')
-      .from('.hero-side .btn-row a', { opacity: 0, y: 14, duration: 0.5, stagger: 0.1 }, '-=0.35')
-      .from('header', { y: -80, opacity: 0, duration: 0.6 }, 0);
-
-    /* ---- Stat strip: counters + rise-in, one orchestrated reveal ---- */
-    gsap.from('.stat', {
-      scrollTrigger: { trigger: '.stat-strip', start: 'top 85%' },
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      stagger: 0.12,
-      ease: 'power2.out'
+    gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.08
     });
 
-    document.querySelectorAll('.stat .num').forEach(el => {
-      const target = parseInt(el.getAttribute('data-target'), 10);
-      const counter = { val: 0 };
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 90%',
-        once: true,
-        onEnter: () => {
-          gsap.to(counter, {
-            val: target,
-            duration: 1.4,
-            ease: 'power3.out',
-            onUpdate: () => { el.textContent = Math.round(counter.val); }
-          });
+    gsap.to(follower, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.25,
+        ease: "power2.out"
+    });
+
+});
+
+
+const hoverElements = document.querySelectorAll(
+    "a, button, .glass-card, .price-card, .service-box"
+);
+
+hoverElements.forEach((element) => {
+
+    element.addEventListener("mouseenter", () => {
+
+        gsap.to(follower, {
+            width: 60,
+            height: 60,
+            duration: 0.25
+        });
+
+        gsap.to(cursor, {
+            scale: 1.5,
+            duration: 0.2
+        });
+
+    });
+
+
+    element.addEventListener("mouseleave", () => {
+
+        gsap.to(follower, {
+            width: 38,
+            height: 38,
+            duration: 0.25
+        });
+
+        gsap.to(cursor, {
+            scale: 1,
+            duration: 0.2
+        });
+
+    });
+
+});
+
+const words = [
+    "BODY.",
+    "STRENGTH.",
+    "CONFIDENCE.",
+    "LEGACY."
+];
+
+const typewriter = document.querySelector(".typewriter");
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+
+function typeEffect() {
+
+    const currentWord = words[wordIndex];
+
+    if (!deleting) {
+
+        typewriter.textContent =
+            currentWord.substring(0, charIndex + 1);
+
+        charIndex++;
+
+        if (charIndex === currentWord.length) {
+
+            deleting = true;
+
+            setTimeout(typeEffect, 1300);
+
+            return;
         }
-      });
-    });
 
-    /* ---- Section headers: label + heading reveal ---- */
-    gsap.utils.toArray('.section-head').forEach(head => {
-      gsap.from(head.children, {
-        scrollTrigger: { trigger: head, start: 'top 85%' },
+    } else {
+
+        typewriter.textContent =
+            currentWord.substring(0, charIndex - 1);
+
+        charIndex--;
+
+        if (charIndex === 0) {
+
+            deleting = false;
+
+            wordIndex++;
+
+            if (wordIndex === words.length) {
+                wordIndex = 0;
+            }
+
+        }
+
+    }
+
+    setTimeout(
+        typeEffect,
+        deleting ? 70 : 120
+    );
+}
+
+typeEffect();
+
+
+gsap.from(".navbar", {
+
+    y: -100,
+    duration: 1,
+    ease: "power4.out"
+
+});
+
+const heroTimeline = gsap.timeline();
+
+heroTimeline
+
+    .from(".small-title", {
         opacity: 0,
         y: 30,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: 'power2.out'
-      });
-    });
+        duration: .7
+    })
 
-    /* ---- Facility cards: staggered grid reveal ---- */
-    gsap.from('.facility-card', {
-      scrollTrigger: { trigger: '.facilities-grid', start: 'top 80%' },
-      opacity: 0,
-      y: 40,
-      duration: 0.6,
-      stagger: { each: 0.1, grid: 'auto', from: 'start' },
-      ease: 'power2.out'
-    });
+    .from(".hero h1", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out"
+    }, "-=.3")
 
-    /* ---- Service rows: slide in from left, one after another ---- */
-    gsap.from('.service-row', {
-      scrollTrigger: { trigger: '.service-list', start: 'top 82%' },
-      opacity: 0,
-      x: -30,
-      duration: 0.55,
-      stagger: 0.12,
-      ease: 'power2.out'
-    });
+    .from(".hero-text", {
+        opacity: 0,
+        y: 30,
+        duration: .7
+    }, "-=.5")
 
-    /* ---- Membership plans: rise + slight scale, featured pops last ---- */
-    gsap.from('.membership-grid .plan', {
-      scrollTrigger: { trigger: '.membership-grid', start: 'top 80%' },
-      opacity: 0,
-      y: 50,
-      scale: 0.97,
-      duration: 0.7,
-      stagger: 0.15,
-      ease: 'power3.out'
-    });
+    .from(".hero-buttons", {
+        opacity: 0,
+        y: 25,
+        duration: .7
+    }, "-=.4")
 
-    /* ---- CTA band ---- */
-    gsap.from('.cta-band h2, .cta-band .btn-primary', {
-      scrollTrigger: { trigger: '.cta-band', start: 'top 85%' },
-      opacity: 0,
-      y: 30,
-      duration: 0.7,
-      stagger: 0.15,
-      ease: 'power2.out'
-    });
+    .from(".hero-stats > div", {
+        opacity: 0,
+        y: 30,
+        stagger: .15,
+        duration: .6
+    }, "-=.4");
 
-    /* ---- Footer columns ---- */
-    gsap.from('.footer-top > *', {
-      scrollTrigger: { trigger: 'footer', start: 'top 90%' },
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power2.out'
-    });
-  }
+
+gsap.to(".hero-glow", {
+
+    x: 80,
+    y: -50,
+
+    duration: 4,
+
+    repeat: -1,
+
+    yoyo: true,
+
+    ease: "sine.inOut"
+
 });
+
+gsap.from(".facility-card", {
+
+    scrollTrigger: {
+        trigger: "#facilities",
+        start: "top 75%",
+        toggleActions: "play none none reverse"
+    },
+    opacity: 0,
+    y: 80,
+    scale: .9,
+    duration: .8,
+});
+
+
+gsap.utils.toArray(".section-heading").forEach((heading) => {
+    gsap.from(heading, {
+        scrollTrigger: {
+            trigger: heading,
+            start: "top 85%"
+        },
+        opacity: 0,
+        y: 50,
+
+        duration: .8,
+    });
+
+});
+
+gsap.from(".price-card", {
+
+    scrollTrigger: {
+        trigger: ".pricing",
+        start: "top 80%"
+    },
+
+    opacity: 0,
+    y: 60,
+
+    duration: .8,
+
+});
+
+gsap.from(".service-box", {
+
+    scrollTrigger: {
+        trigger: ".service-grid",
+        start: "top 80%"
+    },
+
+    opacity: 0,
+    y: 70,
+
+});
+
+gsap.from(".cta", {
+
+    scrollTrigger: {
+        trigger: ".cta",
+        start: "top 80%"
+    },
+
+    opacity: 0,
+    scale: .92,
+
+    duration: 1,
+
+    ease: "power3.out"
+
+});
+
+gsap.from(".contact-info", {
+
+    scrollTrigger: {
+        trigger: ".contact-wrapper",
+        start: "top 80%"
+    },
+
+    opacity: 0,
+    x: -70,
+
+    duration: .9,
+
+    ease: "power3.out"
+
+});
+
+
+gsap.from("#contactForm", {
+
+    scrollTrigger: {
+        trigger: ".contact-wrapper",
+        start: "top 80%"
+    },
+
+    opacity: 0,
+    x: 70,
+
+    duration: .9,
+
+    ease: "power3.out"
+
+});
+
+document.querySelectorAll(".glass-card, .price-card").forEach(card => {
+
+    card.addEventListener("mousemove", (e) => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX =
+            ((y - centerY) / centerY) * -4;
+
+        const rotateY =
+            ((x - centerX) / centerX) * 4;
+
+        gsap.to(card, {
+
+            rotateX: rotateX,
+            rotateY: rotateY,
+
+            duration: .3,
+
+            transformPerspective: 800
+
+        });
+
+    });
+
+
+    card.addEventListener("mouseleave", () => {
+
+        gsap.to(card, {
+
+            rotateX: 0,
+            rotateY: 0,
+
+            duration: .5
+
+        });
+
+    });
+
+});
+
+const form = document.getElementById("contactForm");
+const formMessage = document.getElementById("formMessage");
+
+form.addEventListener("submit", (e) => {
+
+    e.preventDefault();
+
+    formMessage.textContent =
+        "✓ Message sent successfully! We'll contact you soon.";
+
+    gsap.fromTo(formMessage,
+
+        {
+            opacity: 0,
+            y: 10
+        },
+
+        {
+            opacity: 1,
+            y: 0,
+            duration: .5
+        }
+
+    );
+
+    form.reset();
+
+});
+
+const menu = document.querySelector(".menu");
+const nav = document.querySelector(".navbar nav");
+
+menu.addEventListener("click", () => {
+
+    nav.classList.toggle("mobile-nav");
+
+});
+
+const style = document.createElement("style");
+
+style.innerHTML = `
+
+@media(max-width:700px){
+
+    .navbar nav.mobile-nav{
+
+        display:flex;
+
+        position:absolute;
+
+        top:80px;
+        left:5%;
+        right:5%;
+
+        padding:25px;
+
+        flex-direction:column;
+
+        gap:20px;
+
+        background:rgba(15,10,24,.97);
+
+        border:1px solid rgba(255,255,255,.1);
+
+        border-radius:15px;
+
+        backdrop-filter:blur(20px);
+
+    }
+
+}
+
+`;
+
+document.head.appendChild(style);
