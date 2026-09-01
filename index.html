@@ -1,13 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strength Training Gym</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Ufaq Fatima
-        
-    </h1>
+
+<header id="siteHeader">
+  <div class="nav-inner">
+    <a href="#top" class="logo">IRON<span>FORM</span></a>
+    <nav class="links" id="navLinks">
+      <a href="#facilities">Facilities</a>
+      <a href="#services">Services</a>
+      <a href="#membership">Membership</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#membership" class="nav-cta">Join Now</a>
+    <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#facilities">Facilities</a>
+  <a href="#services">Services</a>
+  <a href="#membership">Membership</a>
+  <a href="#contact">Contact</a>
+  <a href="#membership" class="nav-cta" style="width:fit-content;">Join Now</a>
+</div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow-row">
+          <div class="plate"></div>
+          <span class="hero-kicker">Karachi's strength &amp; conditioning gym</span>
+        </div>
+        <h1>Train hard.<br>Recover <em>smarter.</em><br>Repeat.</h1>
+      </div>
+      <div class="hero-side">
+        <p>IronForm is built around free weights, real coaching, and a floor plan that never leaves you waiting on equipment. No fluff, no crowd — just the work.</p>
+        <div class="btn-row">
+          <a href="#membership" class="btn-primary">See membership plans</a>
+          <a href="#facilities" class="btn-outline">Tour the gym</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stat-strip">
+    <div class="wrap">
+      <div class="stat"><div class="num" data-target="1200">0</div><div class="label">Active members</div></div>
+      <div class="stat"><div class="num" data-target="18">0</div><div class="label">Certified coaches</div></div>
+      <div class="stat"><div class="num" data-target="24">0</div><div class="label">Hours open, 6 days</div></div>
+      <div class="stat"><div class="num" data-target="9">0</div><div class="label">Years on the floor</div></div>
+    </div>
+  </div>
+
+  <section id="facilities">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-num">Facilities</div>
+          <h2>Everything the work requires</h2>
+        </div>
+        <p>Four zones, one membership. Move between them as your program demands — nothing is locked behind a separate pass.</p>
+      </div>
+
+      <div class="facilities-grid">
+        <div class="facility-card">
+          <svg class="facility-icon" viewBox="0 0 44 44" fill="none"><rect x="4" y="19" width="6" height="6" fill="#E8432C"/><rect x="34" y="19" width="6" height="6" fill="#E8432C"/><rect x="10" y="21" width="24" height="2" fill="#F2EFE9"/></svg>
+          <h3>Free Weight Floor</h3>
+          <p>Full racks of bumper plates, 12 power cages, and a strongman corner for logs, sleds, and yokes.</p>
+        </div>
+        <div class="facility-card">
+          <svg class="facility-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="14" stroke="#E8432C" stroke-width="2"/><path d="M22 14v8l6 4" stroke="#F2EFE9" stroke-width="2" stroke-linecap="round"/></svg>
+          <h3>Conditioning Bay</h3>
+          <p>Rowers, bikes, sleds, and a turf lane for sprint work and carries — built for intervals, not idle cardio.</p>
+        </div>
+        <div class="facility-card">
+          <svg class="facility-icon" viewBox="0 0 44 44" fill="none"><rect x="8" y="8" width="28" height="28" stroke="#E8432C" stroke-width="2"/><path d="M14 30l6-8 5 5 5-9 4 12" stroke="#F2EFE9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Recovery Room</h3>
+          <p>Mobility mats, percussion tools, sauna, and a stretch bay with a coach on hand three days a week.</p>
+        </div>
+        <div class="facility-card">
+          <svg class="facility-icon" viewBox="0 0 44 44" fill="none"><rect x="6" y="10" width="32" height="24" rx="2" stroke="#E8432C" stroke-width="2"/><path d="M14 34v4M30 34v4" stroke="#F2EFE9" stroke-width="2" stroke-linecap="round"/></svg>
+          <h3>Studio Space</h3>
+          <p>Mirrored studio for group classes — HYROX prep, mobility flow, and boxing conditioning on rotation.</p>
+        </div>
+        <div class="facility-card">
+          <svg class="facility-icon" viewBox="0 0 44 44" fill="none"><path d="M10 34V16l12-8 12 8v18" stroke="#E8432C" stroke-width="2" fill="none" stroke-linejoin="round"/><rect x="18" y="24" width="8" height="10" stroke="#F2EFE9" stroke-width="2"/></svg>
+          <h3>Locker &amp; Wash</h3>
+          <p>Full lockers, hot showers, and a laundry drop for towels and loaner gear — in and out without the hassle.</p>
+        </div>
+        <div class="facility-card">
+          <svg class="facility-icon" viewBox="0 0 44 44" fill="none"><rect x="6" y="16" width="32" height="12" stroke="#E8432C" stroke-width="2"/><rect x="12" y="10" width="4" height="24" fill="#F2EFE9"/><rect x="28" y="10" width="4" height="24" fill="#F2EFE9"/></svg>
+          <h3>Members' Kitchen</h3>
+          <p>Fridge stocked for prepped meals, a blender bar, and bulk protein at cost — no vending machines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-num">Services</div>
+          <h2>Coaching that's actually built in</h2>
+        </div>
+        <p>Membership gets you the floor. These are the extras members book most — some included, some priced per session.</p>
+      </div>
+
+      <div class="service-list">
+        <div class="service-row">
+          <span class="service-idx">01</span>
+          <h3>Onboarding assessment</h3>
+          <p>Movement screen and goal-setting session with a coach before your first week on the floor.</p>
+          <span class="service-tag">Included</span>
+        </div>
+        <div class="service-row">
+          <span class="service-idx">02</span>
+          <h3>Personal training</h3>
+          <p>One-to-one programming and in-session coaching, booked in blocks of 4, 8, or 12 sessions.</p>
+          <span class="service-tag">From Rs 3,500</span>
+        </div>
+        <div class="service-row">
+          <span class="service-idx">03</span>
+          <h3>Group classes</h3>
+          <p>HYROX prep, boxing conditioning, and mobility flow — capped at 14 people per class.</p>
+          <span class="service-tag">Included</span>
+        </div>
+        <div class="service-row">
+          <span class="service-idx">04</span>
+          <h3>Nutrition check-ins</h3>
+          <p>Monthly review with a coach on intake, recovery, and how training is actually going.</p>
+          <span class="service-tag">From Rs 2,000</span>
+        </div>
+        <div class="service-row">
+          <span class="service-idx">05</span>
+          <h3>Recovery sessions</h3>
+          <p>Guided stretch and mobility work in the recovery room, three days a week.</p>
+          <span class="service-tag">Included</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="membership">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-num">Membership</div>
+          <h2>Pick a plan, keep the keys</h2>
+        </div>
+        <p>No joining fee, no lock-in contract. Upgrade, downgrade, or pause from the front desk any time.</p>
+      </div>
+
+      <div class="membership-grid">
+        <div class="plan">
+          <div class="plan-name">Floor Pass</div>
+          <div class="plan-price">Rs 6,000<small>/ month</small></div>
+          <p class="plan-desc">For members who train on their own and just need the space.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Full access to weight floor &amp; conditioning bay</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Locker &amp; shower access</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Onboarding assessment</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Open gym hours, 6 days</li>
+          </ul>
+          <a href="#contact" class="plan-cta">Choose Floor Pass</a>
+        </div>
+
+        <div class="plan featured">
+          <div class="plan-tag">Most joined</div>
+          <div class="plan-name">Full Access</div>
+          <div class="plan-price">Rs 9,500<small>/ month</small></div>
+          <p class="plan-desc">Everything on the floor plus classes, studio, and recovery room.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Everything in Floor Pass</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Unlimited group classes</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Guided recovery sessions</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>One nutrition check-in monthly</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Guest pass, twice a month</li>
+          </ul>
+          <a href="#contact" class="plan-cta">Choose Full Access</a>
+        </div>
+
+        <div class="plan">
+          <div class="plan-name">Coached</div>
+          <div class="plan-price">Rs 16,000<small>/ month</small></div>
+          <p class="plan-desc">Full access plus weekly one-to-one programming with a coach.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Everything in Full Access</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Weekly 1:1 personal training</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Custom program, updated monthly</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4.5" stroke="#E8432C" stroke-width="2" fill="none"/></svg>Priority class booking</li>
+          </ul>
+          <a href="#contact" class="plan-cta">Choose Coached</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="wrap">
+      <h2>First session's on us.</h2>
+      <a href="#contact" class="btn-primary">Book a free trial</a>
+    </div>
+  </div>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="logo">IRON<span style="color:#E8432C;">FORM</span></div>
+        <p>A strength &amp; conditioning gym in Karachi. Open six days a week, closed Sundays for the floor to breathe.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <a href="#">Shahrah-e-Faisal, Karachi</a>
+        <a href="#">Mon–Sat, 6am – 11pm</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+922112345678">+92 21 1234 5678</a>
+        <a href="mailto:hello@ironform.gym">hello@ironform.gym</a>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IronForm Gym. All rights reserved.</span>
+      <span>Built for people who show up.</span>
+    </div>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
